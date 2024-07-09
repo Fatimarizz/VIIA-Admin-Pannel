@@ -31,3 +31,20 @@ body {
     text-wrap: balance;
   }
 }
+
+.scrollableContainer {
+  overflow: auto; /* Enable scrolling */
+}
+
+/* Customize the scrollbar for the specific element */
+::-webkit-scrollbar {
+  width: 4px; /* Width of the scrollbar */
+  height: 4px; 
+  padding-top: 2px;
+}
+
+/* Customize the scrollbar thumb for the specific element */
+::-webkit-scrollbar-thumb {
+  background-color: #027A48; /* Color of the thumb */
+  border-radius: 6px; /* Rounded corners */
+}
