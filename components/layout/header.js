@@ -21,14 +21,19 @@ const Header = ({ title, subheading }) => {
                         {/* <img src="/assets/hamburger.svg" /> */}
                         <h1 className="font-bold text-xl">{title}</h1>
                     </div>
-                    <div className="flex gap-8">
-                        <img className="cursor-pointer" src="/assets/security.svg" />
-                        <img className="cursor-pointer" src=" /assets/messages.svg" />
+                    <div className="flex gap-8 items-center">
+                        <img className="cursor-pointer  h-6 w-6" src="/assets/security.svg" />
+                        <img className="cursor-pointer  h-6 w-6" src=" /assets/messages.svg" />
+                        <div className='relative'>
+                            <p className='bg-red-500 text-xs rounded-full p-1 px-2 text-white absolute -right-2 -top-4 '>
+                                6
+                            </p>
                         <img
-                            className="cursor-pointer"
+                            className="cursor-pointer h-6 w-6"
                             src="/assets/notification.svg"
                             onClick={handleNotificationClick} // Open notification modal on click
                         />
+                        </div>
                         {data && <UserMenu data={data} />}
                     </div>
                 </div>

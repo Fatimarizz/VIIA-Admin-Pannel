@@ -169,7 +169,7 @@ export default function NotificationComponent({ onClose }) {
                             </div>
                             <div className="flex gap-4">
                                 <Button label="View" buttonClass="text-sm w-[70px] p-2" onClick={handleSubmit} />
-                                <Button label="Marked as resolved" buttonClass="text-sm hover:bg-gray-900/40 hover:text-white w-[170px] p-2 bg-white border-[1px] border-gray-900/20 !text-black" onClick={handleSubmit} />
+                                <Button label="Marked as resolved" buttonClass="text-sm hover:bg-gray-900/40 !hover:text-white w-[170px] p-2 bg-white border-[1px] border-gray-900/20 !text-black" onClick={handleSubmit} />
                             </div>
                         </div>
                     </div>

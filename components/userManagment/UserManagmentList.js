@@ -108,19 +108,19 @@ const UserManagementList = () => {
   const usersTypes = [
     {
       type: "All Users",
-      number: 400,
+      number: 2,
     },
     {
       type: "Unverified",
-      number: 2,
+      number: 1,
     },
     {
       type: "Deactivated Users",
-      number: 2,
+      number: 1,
     },
     {
       type: "Flagged Users",
-      number: 2,
+      number: 1,
     },
   ];
 
