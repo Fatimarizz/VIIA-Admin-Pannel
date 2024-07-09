@@ -8,12 +8,12 @@ export default function Layout ({ children, title})  {
 
     const router = useRouter();
 
-    useEffect(() => {
-      const authToken = localStorage.getItem('authToken');
-      if (!authToken) {
-        router.push('/');
-      }
-    }, [router]);
+    // useEffect(() => {
+    //   const authToken = localStorage.getItem('authToken');
+    //   if (!authToken) {
+    //     router.push('/');
+    //   }
+    // }, [router]);
   
     return (
         <Fragment>
