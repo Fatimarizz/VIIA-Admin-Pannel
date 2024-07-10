@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import React, { useState } from "react";
 import { DownloadIcon } from "lucide-react";
 import ResendDocumentsForm from "./ResendDocuments";
+import { Dialog, DialogTitle } from "@mui/material";
 
 const VerifyUserModal = ({ data, isOpen, onClose }) => {
   const [currentToggle, setCurrentToggle] = useState(0);
@@ -107,7 +108,7 @@ const VerifyUserModal = ({ data, isOpen, onClose }) => {
     onClose();
     setShowResendForm(false); // Reset the form visibility state on close
   };
- 
+
   const handleIdFileChange = (event) => {
     setSelectedIdFile(event.currentTarget.files[0]);
   };
@@ -131,202 +132,203 @@ const VerifyUserModal = ({ data, isOpen, onClose }) => {
   };
 
   return (
-    <>
-      {
-        isOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
-            <div className="flex items-center justify-center">
-              <div className={`bg-white max-w-4xl rounded-lg p-8 ${currentToggle == 1 ? 'h-[550px]' : ''} overflow-y-scroll`}>
-               
-                    <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold leading-6 text-gray-900">
-                        {showResendForm ?
-                        'Resend Documents ' :
-                        ' Verify a user'}
-                       
-                      </h3>
-                      <button className="" onClick={handleCloseModal}>
-                        <XMarkIcon className="h-6 w-6 cursor-pointer text-black" />
-                      </button>
-                    </div>
-                    <div className="mb-6">
-                      {userTypes?.map((item, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setCurrentToggle(index)}
-                          className={`px-4 py-2 w-1/2 font-bold rounded-l ${currentToggle !== index
-                            ? "text-black bg-white"
-                            : "text-gray-700 bg-gray-100 hover:bg-gray-200"
-                            }`}
-                        >
-                          {item}
-                        </button>
-                      ))}
-                    </div>
-                    {showResendForm ?
-                  <ResendDocumentsForm onClose={() => setShowResendForm(false)} />
-                  :
-                  <>
-                    <form onSubmit={formik.handleSubmit}>
-                      <div className="grid grid-cols-2 gap-3 my-3">
-                        <div className="">
-                          <label
-                            htmlFor="selectedOption"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Name of the user
-                          </label>
-                          <select
-                            id="selectedOption"
-                            name="selectedOption"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.selectedOption}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                          >
-                            <option value="">Select an option</option>
-                            {options.map((option, index) => (
-                              <option key={index} value={option}>
-                                {option}
-                              </option>
-                            ))}
-                          </select>
-                          {formik.touched.selectedOption && formik.errors.selectedOption ? (
-                            <div className="text-red-500 text-sm mt-1">
-                              {formik.errors.selectedOption}
-                            </div>
-                          ) : null}
-                        </div>
-                        <div className="">
-                          <label
-                            htmlFor="email"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Email
-                          </label>
-                          <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.email}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                            placeholder="Enter your email"
-                          />
-                          {formik.touched.email && formik.errors.email ? (
-                            <div className="text-red-500 text-sm mt-1">
-                              {formik.errors.email}
-                            </div>
-                          ) : null}
-                        </div>
-                      </div>
-                      <div className="mb-6">
-                        <p className="text-sm font-medium text-gray-700">
-                          ID & Photo verification
-                        </p>
-                        <div className="grid grid-cols-2 gap-4 my-3 ">
-                          <div className="flex  border border-gray-300 rounded-lg p-4">
-                            <label
-                              htmlFor="idFile"
-                              className="text-sm text-gray-600 cursor-pointer"
-                            >
+    <><Dialog open={isOpen} onClose={onClose} fullWidth maxWidth="sm" className="rounded-lg">
+      <DialogTitle>
+        <div className="flex justify-between items-center">
+          <h3 className="text-lg font-semibold leading-6 text-gray-900">
+            {showResendForm ?
+              'Resend Documents ' :
+              ' Verify a user'}
 
-                              <input
-                                id="idFile"
-                                name="idFile"
-                                type="file"
-                                readOnly
-                                className="hidden"
-                              />
-                            </label>
-                            <button
-                              type="button"
-                              className="text-sm flex space-x-3 text-gray-500 cursor-pointer mt-1 items-center "
-                              onClick={() => handleDownloadFile(selectedIdFile)}
-                              disabled={!selectedIdFile}
-                            >
-                              Tech design requirements.pdf
-                              {/* {selectedIdFile ? selectedIdFile.name : "  File"} */}
-                              <DownloadIcon className="h-5 w-5 ml-3" />
-                            </button>
-                          </div>
-                          <div className="flex  border border-gray-300 rounded-lg p-4">
-                            <label
-                              htmlFor="idFile"
-                              className="text-sm text-gray-600 cursor-pointer"
-                            >
+          </h3>
+          <button onClick={onClose}>
+            <svg className="h-6 w-6 cursor-pointer text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </DialogTitle>
 
-                              <input
-                                id="idFile"
-                                name="idFile"
-                                type="file"
-                                readOnly
-                                className="hidden"
-                              />
-                            </label>
-                            <button
-                              type="button"
-                              className="text-sm flex space-x-3 text-gray-500 cursor-pointer mt-1 items-center "
-                              onClick={() => handleDownloadFile(selectedIdFile)}
-                              disabled={!selectedIdFile}
-                            >
-                              Tech design requirements.pdf
-                              {/* {selectedIdFile ? selectedIdFile.name : "  File"} */}
-                              <DownloadIcon className="h-5 w-5 ml-3" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      {currentToggle === 1 && (
-                        <div>
-                          <p className="text-sm font-medium text-gray-700 mb-2">
-                            Car details (DVLA)
-                          </p>
-                          <div className="grid grid-cols-2 gap-4">
-                            {Object.entries(carDetails).map(([key, { label, value }]) => (
-                              <div key={key} className="mb-4">
-                                <p className="text-sm font-medium text-gray-700">
-                                  {label}
-                                </p>
-                                <p className="text-sm text-gray-600">{value}</p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                      <div className="flex items-center justify-between mt-8">
-                        <button
-                          type="button"
-                          className="text-sm font-semibold text-primary-500 hover:text-primary-600"
-                          onClick={handleRequestResend}
-                        >
-                          Request to resend documents
-                        </button>
-                        <div className="space-x-4">
-                          <button
-                            type="button"
-                            className="text-sm text-white px-3 py-2 bg-red-500 rounded-md"
-                            onClick={handleCloseModal}
-                          >
-                            Cancel
-                          </button>
-                          <button
-                            type="submit"
-                            className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700"
-                            disabled={formik.isSubmitting}
-                          >
-                            Verify User
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </>
-                }
+      <div className={`p-8 ${currentToggle == 1 ? 'h-[550px]' : ''} overflow-y-scroll`}>
+
+
+        <div className="mb-6">
+          {userTypes?.map((item, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentToggle(index)}
+              className={`px-4 py-2 w-1/2 font-bold rounded-l ${currentToggle !== index
+                ? "text-black bg-white"
+                : "text-gray-700 bg-gray-100 hover:bg-gray-200"
+                }`}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+        {showResendForm ?
+          <ResendDocumentsForm onClose={() => setShowResendForm(false)} />
+          :
+          <>
+            <form onSubmit={formik.handleSubmit}>
+              <div className="grid grid-cols-2 gap-3 my-3">
+                <div className="">
+                  <label
+                    htmlFor="selectedOption"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Name of the user
+                  </label>
+                  <select
+                    id="selectedOption"
+                    name="selectedOption"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.selectedOption}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  >
+                    <option value="">Select an option</option>
+                    {options.map((option, index) => (
+                      <option key={index} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                  {formik.touched.selectedOption && formik.errors.selectedOption ? (
+                    <div className="text-red-500 text-sm mt-1">
+                      {formik.errors.selectedOption}
+                    </div>
+                  ) : null}
+                </div>
+                <div className="">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.email}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                    placeholder="Enter your email"
+                  />
+                  {formik.touched.email && formik.errors.email ? (
+                    <div className="text-red-500 text-sm mt-1">
+                      {formik.errors.email}
+                    </div>
+                  ) : null}
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+              <div className="mb-6">
+                <p className="text-sm font-medium text-gray-700">
+                  ID & Photo verification
+                </p>
+                <div className="grid grid-cols-2 gap-4 my-3 ">
+                  <div className="flex  border border-gray-300 rounded-lg p-4">
+                    <label
+                      htmlFor="idFile"
+                      className="text-sm text-gray-600 cursor-pointer"
+                    >
+
+                      <input
+                        id="idFile"
+                        name="idFile"
+                        type="file"
+                        readOnly
+                        className="hidden"
+                      />
+                    </label>
+                    <button
+                      type="button"
+                      className="text-sm flex space-x-3 text-gray-500 cursor-pointer mt-1 items-center "
+                      onClick={() => handleDownloadFile(selectedIdFile)}
+                      disabled={!selectedIdFile}
+                    >
+                      Tech design requirements.pdf
+                      {/* {selectedIdFile ? selectedIdFile.name : "  File"} */}
+                      <DownloadIcon className="h-5 w-5 ml-3" />
+                    </button>
+                  </div>
+                  <div className="flex  border border-gray-300 rounded-lg p-4">
+                    <label
+                      htmlFor="idFile"
+                      className="text-sm text-gray-600 cursor-pointer"
+                    >
+
+                      <input
+                        id="idFile"
+                        name="idFile"
+                        type="file"
+                        readOnly
+                        className="hidden"
+                      />
+                    </label>
+                    <button
+                      type="button"
+                      className="text-sm flex space-x-3 text-gray-500 cursor-pointer mt-1 items-center "
+                      onClick={() => handleDownloadFile(selectedIdFile)}
+                      disabled={!selectedIdFile}
+                    >
+                      Tech design requirements.pdf
+                      {/* {selectedIdFile ? selectedIdFile.name : "  File"} */}
+                      <DownloadIcon className="h-5 w-5 ml-3" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              {currentToggle === 1 && (
+                <div>
+                  <p className="text-sm font-medium text-gray-700 mb-2">
+                    Car details (DVLA)
+                  </p>
+                  <div className="grid grid-cols-2 gap-4">
+                    {Object.entries(carDetails).map(([key, { label, value }]) => (
+                      <div key={key} className="mb-4">
+                        <p className="text-sm font-medium text-gray-700">
+                          {label}
+                        </p>
+                        <p className="text-sm text-gray-600">{value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              <div className="flex items-center justify-between mt-8">
+                <button
+                  type="button"
+                  className="text-sm font-semibold text-primary-500 hover:text-primary-600"
+                  onClick={handleRequestResend}
+                >
+                  Request to resend documents
+                </button>
+                <div className="space-x-4">
+                  <button
+                    type="button"
+                    className="text-sm text-white px-3 py-2 bg-red-500 rounded-md"
+                    onClick={handleCloseModal}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700"
+                    disabled={formik.isSubmitting}
+                  >
+                    Verify User
+                  </button>
+                </div>
+              </div>
+            </form>
+          </>
+        }
+      </div>
+
+    </Dialog>
 
     </>
   );

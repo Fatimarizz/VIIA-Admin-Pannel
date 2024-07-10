@@ -2,6 +2,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import React from "react";
+import { Dialog, DialogTitle} from "@mui/material";
 import { InfoIcon } from "lucide-react";
 
 const DeactivateUserModal = ({ isOpen, onClose, data }) => {
@@ -10,8 +11,7 @@ const DeactivateUserModal = ({ isOpen, onClose, data }) => {
         reason: Yup.string().required("Required"),
     });
 
-    console.log("Data", data)
-    // Formik form submit function
+    
     const onSubmit = (values, { setSubmitting }) => {
         console.log(values); // Handle form submission logic here
         setSubmitting(false);
@@ -33,16 +33,19 @@ const DeactivateUserModal = ({ isOpen, onClose, data }) => {
 
     return (
         <>
-            {isOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
-                    <div className="flex items-center justify-center">
-                        <div className="bg-white max-w-lg rounded-lg p-5 overflow-y-scroll">
-                            <div className="flex justify-end items-center ">
-
-                                <button onClick={handleCloseModal}>
-                                    <XMarkIcon className="h-6 w-6 cursor-pointer text-black" />
-                                </button>
-                            </div>
+              <Dialog open={isOpen} onClose={onClose} fullWidth maxWidth="xs" className="rounded-lg">
+            <DialogTitle>
+                <div className="flex justify-between items-center">
+                    <h3 className="text-lg font-semibold">Deactivating User</h3>
+                    <button onClick={onClose}>
+                        <svg className="h-6 w-6 cursor-pointer text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </DialogTitle>
+                        
+                            <div className="p-4">
                             <div className="flex justify-center -mt-4 mb-3">
                                 <div className="rounded-full bg-red-100 p-1.5">
                                     <div className="rounded-full bg-red-200 p-1.5">
@@ -56,7 +59,7 @@ const DeactivateUserModal = ({ isOpen, onClose, data }) => {
                             </h3>
                             <p className="text-center text-sm mt-2">
                                 You are about to deactivate this user account
-                                <span className="font-semibold"> ({data.fullName})</span>
+                                <span className="font-semibold"> ({data.FullName})</span>
                                 <br />
                                 click on <span className="font-semibold"> Cancel</span> to go back and  <span className="font-semibold"> Deactivate </span>to proceed.
                             </p>
@@ -107,10 +110,10 @@ const DeactivateUserModal = ({ isOpen, onClose, data }) => {
                                     </button>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                </div>
-            )}
+                            </div>
+                        
+            </Dialog>
+            
         </>
     );
 };

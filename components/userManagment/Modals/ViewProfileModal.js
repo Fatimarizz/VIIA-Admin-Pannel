@@ -3,12 +3,12 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import DeactivateUserModal from "./DeactivatingUser";
 import ReActivatingUserModal from "./ReactiveUserModal";
 import VerficationReminderModal from "./VerficationReminder";
-import { CheckBadgeIcon, ChevronDownIcon, ChevronUpIcon  , ArrowRightIcon , StarIcon} from "@heroicons/react/24/solid";
+import { CheckBadgeIcon, ChevronDownIcon, ChevronUpIcon, ArrowRightIcon, StarIcon } from "@heroicons/react/24/solid";
 import FlagUserModal from "./FlaggingUser";
 import UnFlaggingUserModal from "./UnFlaggingUser";
 import VerifyUserModal from "./VerifyUserModal";
 import EditUserModal from "./EditUserModal";
-
+import { Dialog, DialogTitle } from "@mui/material";
 
 const ViewProfileModal = ({ data: profile, isOpen, onClose }) => {
     const [activeTab, setActiveTab] = useState("about");
@@ -65,180 +65,180 @@ const ViewProfileModal = ({ data: profile, isOpen, onClose }) => {
 
     return (
         <>
-            {isOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
-                    <div className="flex items-center justify-center">
-                        <div className="bg-white w-[48rem] rounded-lg px-5 h-[600px] overflow-y-scroll">
-                            <div className="flex justify-between items-center py-3 sticky top-0 bg-white">
-                                <h3 className="text-lg text-green-700 text-center font-semibold leading-6">
-                                    View Profile Modal
-                                </h3>
-                                <button onClick={handleCloseModal}>
-                                    <XMarkIcon className="h-6 w-6 cursor-pointer text-black" />
-                                </button>
-                            </div>
+            <Dialog open={isOpen} onClose={onClose} fullWidth maxWidth="md" className="rounded-lg">
+                <DialogTitle>
+                    <div className="flex justify-between items-center">
+                        <h3 className="text-lg font-semibold">View User Profile</h3>
+                        <button onClick={onClose}>
+                            <svg className="h-6 w-6 cursor-pointer text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </DialogTitle>
 
-                            <div className="px-3 flex flex-col justify-center items-center my-4">
-                                <div className="relative w-full">
-                                    <img src={data.coverPicture} alt="Cover" className="w-full object-fill" />
-                                    <div className="flex flex-col items-start relative">
-                                        <div className="absolute left-10 -top-12 pl-3 transform -translate-x-1/2">
-                                            <img
-                                                src={data.profilePicture}
-                                                alt="Profile"
-                                                className="w-28 h-28 rounded-full "
-                                            />
-                                            {data.isVerified && (
-                                                <CheckBadgeIcon className="absolute bottom-6 right-0 h-6 w-6 text-blue-500" />
-                                            )}
-                                        </div>
+                <div className="p-4 h-[700px] overflow-y-scroll">
 
-                                        <div className="mt-16">
-                                            <h3 className="text-lg font-semibold -mt-2 ">{data.name}</h3>
-                                            <div className="text-gray-500 flex space-x-3">
-                                                <p>{data.bio}</p>
-                                                <p>
-                                                    <span
-                                                        className={`${profile.verificationStatus == "verified"
-                                                                ? "bg-primary-200 text-primary-600"
-                                                                : "bg-gray-200"
-                                                            } rounded-full px-2 `}
-                                                    >
-                                                        {profile.verificationStatus}
-                                                    </span>
-                                                </p>
-                                                {profile?.deactivated ? (
-                                                    <p>
-                                                        <span
-                                                            className={`
+                    <div className="px-3 flex flex-col justify-center items-center my-4">
+                        <div className="relative w-full">
+                            <img src={data.coverPicture} alt="Cover" className="w-full object-fill" />
+                            <div className="flex flex-col items-start relative">
+                                <div className="absolute left-10 -top-12 pl-3 transform -translate-x-1/2">
+                                    <img
+                                        src={data.profilePicture}
+                                        alt="Profile"
+                                        className="w-28 h-28 rounded-full "
+                                    />
+                                    {data.isVerified && (
+                                        <CheckBadgeIcon className="absolute bottom-6 right-0 h-6 w-6 text-blue-500" />
+                                    )}
+                                </div>
+
+                                <div className="mt-16">
+                                    <h3 className="text-lg font-semibold -mt-2 ">{data.name}</h3>
+                                    <div className="text-gray-500 flex space-x-3">
+                                        <p>{data.bio}</p>
+                                        <p>
+                                            <span
+                                                className={`${profile.VerificationStatus == "verified"
+                                                    ? "bg-primary-200 text-primary-600"
+                                                    : "bg-gray-200"
+                                                    } rounded-full px-2 `}
+                                            >
+                                                {profile.VerificationStatus}
+                                            </span>
+                                        </p>
+                                        {profile?.deactivated ? (
+                                            <p>
+                                                <span
+                                                    className={`
                                                     bg-red-100
                                                      rounded-full px-2 text-sm text-red-700 capitalize`}
-                                                        >
-                                                            Deactivated
-                                                        </span>
-                                                    </p>
-                                                ) : (
-                                                    profile?.flagged ==='flagged' && (
-                                                        <p className="flex items-center">
-                                                            <span
-                                                                className={`
+                                                >
+                                                    Deactivated
+                                                </span>
+                                            </p>
+                                        ) : (
+                                            profile?.flagged === 'flagged' && (
+                                                <p className="flex items-center">
+                                                    <span
+                                                        className={`
                                                     bg-[#F3FEE7]
                                                      rounded-full px-2 text-sm text-green-700 capitalize`}
-                                                            >
-                                                                {profile.flagged}
-                                                            </span>
+                                                    >
+                                                        {profile.flagged}
+                                                    </span>
 
-                                                            <img
-                                                                src="/assets/flag.svg"
-                                                                className="h-5 w-5 ml-2 text-green-300"
-                                                            />
-                                                        </p>
-                                                    )
-                                                )}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="mt-3">
-                                <div className="border-b border-gray-200">
-                                    <nav className="-mb-px flex">
-                                        <button
-                                            className={`mr-8 py-4 px-1 text-center border-b-2 font-medium text-sm ${activeTab === "about"
-                                                    ? "border-indigo-500 text-indigo-600"
-                                                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                                                }`}
-                                            onClick={() => handleTabClick("about")}
-                                        >
-                                            About
-                                        </button>
-                                        <button
-                                            className={`mr-8 py-4 px-1 text-center border-b-2 font-medium text-sm ${activeTab === "passenger"
-                                                    ? "border-indigo-500 text-indigo-600"
-                                                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                                                }`}
-                                            onClick={() => handleTabClick("passenger")}
-                                        >
-                                            Trip as Passenger
-                                        </button>
-                                        <button
-                                            className={`py-4 px-1 text-center border-b-2 font-medium text-sm ${activeTab === "driver"
-                                                    ? "border-indigo-500 text-indigo-600"
-                                                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                                                }`}
-                                            onClick={() => handleTabClick("driver")}
-                                        >
-                                            Trip as Driver
-                                        </button>
-                                    </nav>
-                                </div>
-                                <div className="mt-4">
-                                    {activeTab === "about" && <AboutTab profile={profile} />}
-                                    {activeTab === "passenger" && <TripAsPassengerTab />}
-                                    {activeTab === "driver" && <TripAsDriverTab />}
-                                </div>
-                                <div className="flex items-center justify-end mt-8 sticky -bottom-1 bg-white py-3">
-                                    <div className="space-x-4">
-                                        {profile.flagged !== "flagged" && (
-                                            <button
-                                                type="button"
-                                                className="text-sm font-semibold text-red-500 hover:text-red-600"
-                                                onClick={() => handleOpenInnerModal("Deactivate")}
-                                            >
-                                                Deactivate
-                                            </button>
-                                        )}
-                                        {profile.verificationStatus == "verified" ? (
-                                            <button
-                                                type="button"
-                                                className="text-sm text-black px-3 py-2 bg-white border-2 rounded-md"
-                                                onClick={() => handleOpenInnerModal("Edit")}
-                                            >
-                                                Edit
-                                            </button>
-                                        ) : (
-                                            <button
-                                                type="button"
-                                                className="text-sm text-white px-3 py-2 bg-red-500 rounded-md"
-                                                onClick={() => handleOpenInnerModal("VerificationReminder")}
-                                            >
-                                                Verification Reminder
-                                            </button>
-                                        )}
-                                        {profile.deactivated ? (
-                                            <button
-                                                type="submit"
-                                                className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700"
-                                                onClick={() => handleOpenInnerModal("Reactivate")}
-                                            >
-                                                Re-activate User
-                                            </button>
-                                        ) : profile.flagged !== "flagged" ? (
-                                            <button
-                                                type="submit"
-                                                className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700"
-                                                onClick={() => handleOpenInnerModal("Verify")}
-                                            >
-                                                Verify User
-                                            </button>
-                                        ) : (
-                                            <button
-                                                type="submit"
-                                                className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700"
-                                                onClick={() => handleOpenInnerModal("Unflag")}
-                                            >
-                                                Unflag User
-                                            </button>
+                                                    <img
+                                                        src="/assets/flag.svg"
+                                                        className="h-5 w-5 ml-2 text-green-300"
+                                                    />
+                                                </p>
+                                            )
                                         )}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div className="mt-3">
+                        <div className="border-b border-gray-200">
+                            <nav className="-mb-px flex">
+                                <button
+                                    className={`mr-8 py-4 px-1 text-center border-b-2 font-medium text-sm ${activeTab === "about"
+                                        ? "border-indigo-500 text-indigo-600"
+                                        : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                                        }`}
+                                    onClick={() => handleTabClick("about")}
+                                >
+                                    About
+                                </button>
+                                <button
+                                    className={`mr-8 py-4 px-1 text-center border-b-2 font-medium text-sm ${activeTab === "passenger"
+                                        ? "border-indigo-500 text-indigo-600"
+                                        : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                                        }`}
+                                    onClick={() => handleTabClick("passenger")}
+                                >
+                                    Trip as Passenger
+                                </button>
+                                <button
+                                    className={`py-4 px-1 text-center border-b-2 font-medium text-sm ${activeTab === "driver"
+                                        ? "border-indigo-500 text-indigo-600"
+                                        : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                                        }`}
+                                    onClick={() => handleTabClick("driver")}
+                                >
+                                    Trip as Driver
+                                </button>
+                            </nav>
+                        </div>
+                        <div className="mt-4">
+                            {activeTab === "about" && <AboutTab profile={profile} />}
+                            {activeTab === "passenger" && <TripAsPassengerTab />}
+                            {activeTab === "driver" && <TripAsDriverTab />}
+                        </div>
+                        <div className="flex items-center justify-end mt-8 sticky -bottom-4 bg-white py-3">
+                            <div className="space-x-4">
+                                {profile.Flagged !== "flag" && (
+                                    <button
+                                        type="button"
+                                        className="text-sm font-semibold text-red-500 hover:text-red-600"
+                                        onClick={() => handleOpenInnerModal("Deactivate")}
+                                    >
+                                        Deactivate
+                                    </button>
+                                )}
+                                {profile.VerificationStatus == "verified" ? (
+                                    <button
+                                        type="button"
+                                        className="text-sm text-black px-3 py-2 bg-white border-2 rounded-md"
+                                        onClick={() => handleOpenInnerModal("Edit")}
+                                    >
+                                        Edit
+                                    </button>
+                                ) : (
+                                    <button
+                                        type="button"
+                                        className="text-sm text-white px-3 py-2 bg-red-500 rounded-md"
+                                        onClick={() => handleOpenInnerModal("VerificationReminder")}
+                                    >
+                                        Verification Reminder
+                                    </button>
+                                )}
+                                {profile.deactivated ? (
+                                    <button
+                                        type="submit"
+                                        className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700"
+                                        onClick={() => handleOpenInnerModal("Reactivate")}
+                                    >
+                                        Re-activate User
+                                    </button>
+                                ) : profile.Flagged !== "flag" ? (
+                                    <button
+                                        type="submit"
+                                        className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700"
+                                        onClick={() => handleOpenInnerModal("Verify")}
+                                    >
+                                        Verify User
+                                    </button>
+                                ) : (
+                                    <button
+                                        type="submit"
+                                        className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700"
+                                        onClick={() => handleOpenInnerModal("Unflag")}
+                                    >
+                                        Unflag User
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            )}
-             {activeInnerModal === "Verify" && (
+
+            </Dialog>
+            {activeInnerModal === "Verify" && (
                 <VerifyUserModal
                     data={profile}
                     isOpen={activeInnerModal === "Verify"}
@@ -419,7 +419,7 @@ const AboutTab = ({ profile }) => {
                     <p className="font-semibold">Gender:</p>
                     <p>{data.gender}</p>
                 </div>
-                {profile.verificationStatus == 'verified' && profile?.flagged !== 'flagged' &&
+                {profile.VerificationStatus == 'verified' && profile?.Flagged !== 'flag' &&
                     <>
                         <div>
                             <p className="font-semibold">Active Status:</p>
@@ -435,12 +435,12 @@ const AboutTab = ({ profile }) => {
                     <p className="font-semibold">Registration Date:</p>
                     <p>{data.registrationDate}</p>
                 </div>
-                {profile.verificationStatus !== 'verified' && profile?.flagged !== 'flagged' &&
+                {profile.VerificationStatus !== 'verified' && profile?.Flagged !== 'flag' &&
                     <div>
 
                     </div>
                 }
-                {profile.verificationStatus == 'verified' &&
+                {profile.VerificationStatus == 'verified' &&
 
                     <div>
                         <p className="font-semibold">Verification Date:</p>
@@ -453,28 +453,28 @@ const AboutTab = ({ profile }) => {
                     <>
                         <div className="col-span-2 text-red-700">
                             <p className="font-semibold">Date Deactivated</p>
-                            <p >{profile?.dateDeactivated}</p>
+                            <p >{profile?.DateDeactivated}</p>
                         </div>
                         <div className="col-span-2">
                             <p className="font-semibold">Reason of Deactivation</p>
-                            <p>{profile?.reasonForDeactivation}</p>
+                            <p>{profile?.ReasonForDeactivation}</p>
                         </div>
                     </>
-                    : profile?.flagged == 'flagged' &&
+                    : profile?.Flagged == 'flag' &&
                     <>
                         <div className="col-span-2">
                             <p className="font-semibold">DateFlagged</p>
-                            <p>{profile?.dateFlagged}</p>
+                            <p>{profile?.DateFlagged}</p>
                         </div>
                         <div className="col-span-2">
                             <p className="font-semibold">Reason of Flagged</p>
-                            <p>{profile?.reasonForFlagging}</p>
+                            <p>{profile?.ReasonForFlagging}</p>
                         </div>
                     </>
                 }
 
 
-                {profile.verificationStatus == 'verified' && profile?.flagged !== 'flagged' &&
+                {profile.VerificationStatus == 'verified' && profile?.Flagged !== 'flag' &&
                     <>
                         <div className="">
                             <p className="font-semibold">Car Details:</p>
@@ -517,7 +517,7 @@ const AboutTab = ({ profile }) => {
                         ))}
                     </div>
                 </div>
-                {profile.verificationStatus == 'verified'  &&
+                {profile.VerificationStatus == 'verified' &&
                     <div className="col-span-2">
                         <div className="flex items-center border-t-2 justify-between cursor-pointer pt-4" onClick={handleCarDetailsToggle}>
                             <p className="font-semibold text-lg">Full Car details (DVLA):</p>

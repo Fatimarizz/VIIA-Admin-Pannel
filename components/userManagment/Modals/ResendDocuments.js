@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
+import { Dialog, DialogTitle} from "@mui/material";
 const ResendDocumentsForm = ({ onClose }) => {
     const validationSchema = Yup.object().shape({
         name: Yup.string().required("Required"),

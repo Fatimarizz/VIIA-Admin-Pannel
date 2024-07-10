@@ -1,146 +1,252 @@
-// columns.js
-
 import CustomFilterMenu from "./customeMenu";
-export const allUsersColumns = [
-  { field: "fullName", headerName: "Full Name" },
-  { field: "email", headerName: "Email" },
-  { field: "phoneNumber", headerName: "Phone Number",
-    renderCell:(value)=>(
-      <div className="w-16">
-        {value}
-      </div>
-    )
-    
-   },
-  { field: "dateRegistered", headerName: "Date Registered" },
-  { field: "gender", headerName: "Gender", 
-    renderCell:(value)=>(
-    <div className="w-8">
-      {value}
-    </div>
-  ) },
-  
-  { field: "userType", headerName: "User Type" },
-  {
-    field: "activeStatus",
-    headerName: "Active Status",
-    renderCell: (value) => (
-      <div className="px-1" style={{ backgroundColor: value === "Active" ? "#ECFDF3" : "#FDECEA", padding: "3px", borderRadius: "10px" }}>
-        {value}
-      </div>
-    ),
-  },
-  { field: "ridesCount", headerName: "Rides Count" },
-  {
-    field: "flagged",
-    headerName: "Flagged",
-    renderCell: (value) => (
-      <div className="">
-        {value === "flag" ? <img className="w-[22px]" src="/assets/flag.svg" alt="Flagged" /> : value === "unflag" ? <img className="w-[22px] text-red-500" src="/assets/flag.svg" alt="Flagged" /> :value}
-      </div>
-    ),
-  },
-  {
-    field: "verificationStatus",
-    headerName: "Verification Status",
-    renderCell: (value) => (
-      <div className="px-1" style={{ backgroundColor: value === "verified" ? "#ECFDF3" : value === "unverified" ? "#EAECF0" : "", }}>
-        {value}
-      </div>
-    ),
-  },
-  {
-    field: "actions",
-    headerName: "Actions",
-    renderCell: (row, value) => (
-      <div>
 
-        <CustomFilterMenu userType={'all'} data={value} />
+export const allUsersColumns = [
+  { field: "FullName", headerName: "Full name", flex: 1 },
+  { field: "Email", headerName: "Email", flex: 1 },
+  { field: "PhoneNumber", headerName: "Phone number", flex: 1 },
+  {
+    field: "DateRegistered",
+    headerName: "Date registered",
+    flex: 1,
+  },
+  {
+    field: "Gender",
+    headerName: "Gender",
+    flex: 1,
+  },
+  {
+    field: "UserType",
+    headerName: "User type",
+    flex: 1,
+  },
+  {
+    field: "ActiveStatus",
+    headerName: "Active Status",
+    flex: 1,
+    renderCell: (params) => (
+      <div className="my-2 p-2 px-4 text-sm rounded-md"
+        style={{
+          backgroundColor: params.value === "Active" ? "#ECFDF3" : "#ECFDF3",
+         
+        }}
+      >
+        {params.value === "Active" ? "Active" : "Insctive"}
       </div>
     ),
+  },
+
+  {
+    field: "RidesCount",
+    headerName: "Rides count",
+    flex: 1,
+  },
+  {
+    field: "Flagged",
+    headerName: "Flagged",
+    flex: 1,
+    renderCell: (params) => (
+      <div>
+        {params.value === "flag" ? (
+          <img className="w-[22px] my-4" src="/assets/flag.svg" />
+        ) : (
+          params.value
+        )}
+      </div>
+    ),
+  },
+  {
+    field: "VerificationStatus",
+    headerName: "Verification status",
+    flex: 1,
+    renderCell: (params) => (
+      <div 
+      className="my-2 p-2 px-4 text-sm rounded-md"
+        style={{
+          backgroundColor: params.value === "verified" ? "#ECFDF3" : "#ECFDF3",
+        
+        }}
+      >
+        {params.value === "verified" ? "Verified" : "Non Verified"}
+      </div>
+    ),
+  },
+  {
+    field: "Actions",
+    headerName: "Actions",
+    sortable: false,
+    filterable: false,
+    renderCell: (params) => {
+      const id = params.row.id;
+
+      return (
+        <div  className="my-2">
+          <CustomFilterMenu userType={'all'} data={params.row} />
+        </div>
+      );
+    },
   },
 ];
 
 export const unVerifiedUserColumns = [
-  { field: "fullName", headerName: "Full Name" },
-  { field: "email", headerName: "Email" },
-  { field: "phoneNumber", headerName: "Phone Number" },
-  { field: "dateRegistered", headerName: "Date Registered" },
-  { field: "regDate", headerName: "Reg Date" },
-  { field: "gender", headerName: "Gender" },
-  { field: "userType", headerName: "User Type" },
+  { field: "FullName", headerName: "Full name", flex: 1 },
+  { field: "Email", headerName: "Email", flex: 1 },
+  { field: "PhoneNumber", headerName: "Phone number", flex: 1 },
   {
-    field: "verificationStatus",
+    field: "DateRegistered",
+    headerName: "Date registered",
+    flex: 1,
+  },
+  {
+    field: "RegDate",
+    headerName: "Reg Date",
+    flex: 1,
+  },
+  {
+    field: "Gender",
+    headerName: "gender",
+    flex: 1,
+  },
+  {
+    field: "UserType",
+    headerName: "User Type",
+    flex: 1,
+  },
+  {
+    field: "VerificationStatus",
     headerName: "Verification Status",
-    renderCell: (value) => (
-      <div className="px-2 rounded-md" style={{ backgroundColor: value === "verified" ? "#ECFDF3" : value === "Unverified" ? "#EAECF0" : "", }}>
-        {value}
+    flex: 1,
+    renderCell: (params) => (
+      <div className="my-2 p-2 px-4 text-sm rounded-md"
+        style={{
+          backgroundColor: params.value === "Active" ? "#ECFDF3" : "#ECFDF3",
+          
+        }}
+      >
+        {params.value === "Active" ? "Active" : "Inactive"}
       </div>
     ),
   },
   {
-    field: "actions",
+    field: "Actions",
     headerName: "Actions",
-    renderCell: (row, value) => (
-      <div>
+    sortable: false,
+    filterable: false,
+    renderCell: (params) => {
+      const id = params.row.id;
 
-        <CustomFilterMenu userType={'unverified'} data={value} />
-      </div>
-    ),
+      return (
+        <div  className="my-2">
+          <CustomFilterMenu userType={'unverified'} data={params.row}/>
+        </div>
+      );
+    },
   },
 ];
 
-export const deactivatedUserColumns = [
-  { field: "fullName", headerName: "Full Name" },
-  { field: "email", headerName: "Email" },
-  { field: "userType", headerName: "User Type" },
-  { field: "dateRegistered", headerName: "Date Registered" },
-  { field: "dateDeactivated", headerName: "Date Deactivated" },
+export const deactivatedUserColumns= [
+  { field: "FullName", headerName: "Full name", flex: 1 },
+  { field: "Email", headerName: "Email", flex: 1 },
   {
-    field: "flagged",
+    field: "UserType",
+    headerName: "User Type",
+    flex: 1,
+  },
+  {
+    field: "DateRegistered",
+    headerName: "Date registered",
+    flex: 1,
+  },
+  {
+    field: "DateDeactivated",
+    headerName: "Date Deactivated",
+    flex: 1,
+  },
+  {
+    field: "Flagged",
     headerName: "Flagged",
-    renderCell: (value) => (
-      <div>
-        {value === "flagged" ? <img className="w-[22px]" src="/assets/flag.svg" alt="Flagged" /> : value}
+    flex: 1,
+    renderCell: (params) => (
+      <div >
+        {params.value === "flag" ? (
+          <img className="w-[22px] my-4" src="/assets/flag.svg" />
+        ) : (
+          params.value
+        )}
       </div>
     ),
   },
-  { field: "reasonForDeactivation", headerName: "Reason For Deactivation" },
   {
-    field: "actions",
+    field: "ReasonForDeactivation",
+    headerName: "Reason For Deactivation",
+    flex: 1,
+  },
+  {
+    field: "Actions",
     headerName: "Actions",
-    renderCell: (row, value) => (
-      <div>
-
-        <CustomFilterMenu userType={'deactivated'} data={value} />
-      </div>
-    ),
+    sortable: false,
+    filterable: false,
+    renderCell: (params) => {
+     
+      return (
+        <div  className="my-2">
+          <CustomFilterMenu userType={'deactivated'} data={params.row} />
+        </div>
+      );
+    },
   },
 ];
 
-export const flaggedUserColumns = [
-  { field: "fullName", headerName: "Full Name" },
-  { field: "email", headerName: "Email" },
-  { field: "userType", headerName: "User Type" },
-  { field: "dateFlagged", headerName: "Date Flagged" },
-  { field: "reasonForFlagging", headerName: "Reason For Flagging" },
+export const flaggedUserColumns= [
+  { field: "FullName", headerName: "Full name", flex: 1 },
+  { field: "Email", headerName: "Email", flex: 1 },
   {
-    field: "flagged",
+    field: "UserType",
+    headerName: "User Type",
+    flex: 1,
+  },
+  {
+    field: "DateFlagged",
+    headerName: "Date Flagged",
+    flex: 1,
+  },
+  {
+    field: "ReasonForFlagging",
+    headerName: "Reason For Flagging",
+    flex: 1,
+  },
+  {
+    field: "Flagged",
     headerName: "Flagged",
-    renderCell: (value) => (
+    flex: 1,
+    renderCell: (params) => (
       <div>
-        {value === "flagged" ? <img className="w-[22px]" src="/assets/flag.svg" alt="Flagged" /> : value}
+        {params.value === "flag" ? (
+          <img className="w-[22px] my-4" src="/assets/flag.svg" alt="Flagged" />
+        ) : (
+          params.value
+        )}
       </div>
     ),
   },
   {
-    field: "actions",
+    field: "Actions",
     headerName: "Actions",
-    renderCell: (row, value) => (
-      <div>
+    sortable: false,
+    filterable: false,
+    renderCell: (params) => {
+    
 
-        <CustomFilterMenu userType={'flagged'} data={value} />
-      </div>
-    ),
+      return (
+        <div className="my-2">
+          <CustomFilterMenu userType={'flagged'} data={params.row} />
+        </div>
+      );
+    },
   },
 ];
+
+
+
+
+
+

@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import React from "react";
 import {  AlertTriangle } from "lucide-react";
+import { Dialog, DialogTitle} from "@mui/material";
 
 const VerficationReminderModal = ({ isOpen, onClose, data }) => {
     // Formik form validation schema using Yup
@@ -32,16 +33,19 @@ const VerficationReminderModal = ({ isOpen, onClose, data }) => {
 
     return (
         <>
-            {isOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
-                    <div className="flex items-center justify-center">
-                        <div className="bg-white max-w-lg rounded-lg p-5 overflow-y-scroll">
-                            <div className="flex justify-end items-center ">
+             <Dialog open={isOpen} onClose={onClose} fullWidth maxWidth="xs" className="rounded-lg">
+                <DialogTitle>
+                    <div className="flex justify-between items-center">
+                        <h3 className="text-lg font-semibold">Verfication Reminder</h3>
+                        <button onClick={onClose}>
+                            <svg className="h-6 w-6 cursor-pointer text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </DialogTitle>
 
-                                <button onClick={handleCloseModal}>
-                                    <XMarkIcon className="h-6 w-6 cursor-pointer text-black" />
-                                </button>
-                            </div>
+                <div className="p-4 overflow-y-scroll">
                             <div className="flex justify-center -mt-4 mb-3">
                                 <div className="rounded-full bg-green-100 p-1.5">
                                     <div className="rounded-full bg-green-200 p-1.5">
@@ -55,7 +59,7 @@ const VerficationReminderModal = ({ isOpen, onClose, data }) => {
                             </h3>
                             <p className="text-center text-sm mt-2">
                                 You are about to remind this user account
-                                <span className="font-semibold"> ({data.fullName})</span>
+                                <span className="font-semibold"> ({data.FullName})</span>
                                 <br />
                                 click on <span className="font-semibold"> Cancel</span> to go back and  <span className="font-semibold"> Reminder </span> to proceed.
                             </p>
@@ -102,9 +106,7 @@ const VerficationReminderModal = ({ isOpen, onClose, data }) => {
                                 </div>
                             </form>
                         </div>
-                    </div>
-                </div>
-            )}
+                  </Dialog>
         </>
     );
 };
