@@ -8,13 +8,15 @@ const theme = createTheme({
   components: {
     MuiDataGrid: {
       styleOverrides: {
-        columnHeaders: {
+       
+        columnHeaderRow: {
           backgroundColor: '#EAECF0',
            borderBottom:'none',
            borderRadius:'10px 10px 0px 0px',
            
           color: 'black',
         },
+
         footerContainer: {
           display: 'none', // Hide default footer (pagination)
         },
@@ -40,6 +42,15 @@ const Table = ({ columns, rows }) => {
     <ThemeProvider theme={theme}>
       <div className="pt-3  !rounded-bl-none  !rounded-br-none  !border-b-0 overflow-auto">
         <Box sx={{ width: '98%' }}>
+        <div
+            className="custom-data-grid"
+            style={{
+              borderRadius: '10px 10px 0px 0px',
+              overflow: 'hidden',
+              backgroundColor: '#EAECF0',
+             
+            }}
+          >
           <DataGrid
             rows={paginatedRows}
             columns={columns}
@@ -54,6 +65,7 @@ const Table = ({ columns, rows }) => {
               pageCount={pageCount}
               onPageChange={handlePageChange}
             />
+          </div>
           </div>
         </Box>
       </div>

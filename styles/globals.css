@@ -66,8 +66,9 @@ body {
 .DataGrid-containerBackground {
   background-color: gray !important ;
 }
-.css-swj1b7-MuiDataGrid-root {
+.css-dcten4 {
  
    --unstable_DataGrid-radius: 10px 10px 0px 0px;
-   --DataGrid-containerBackground:'#EAECF0' 
+   --DataGrid-containerBackground:'#EAECF0' !important 
 }
+
