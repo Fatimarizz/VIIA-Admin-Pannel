@@ -48,3 +48,26 @@ body {
   background-color: #027A48; /* Color of the thumb */
   border-radius: 6px; /* Rounded corners */
 }
+.custom-head {
+  background-color: red !important;
+}
+
+/* Tooltip styles */
+.custom-tooltip {
+  background-color: black !important;
+  color: white !important;
+  font-size: 0.75rem !important;
+}
+
+.custom-tooltip-arrow {
+  color: black !important;
+}
+
+.DataGrid-containerBackground {
+  background-color: gray !important ;
+}
+.css-swj1b7-MuiDataGrid-root {
+ 
+   --unstable_DataGrid-radius: 10px 10px 0px 0px;
+   --DataGrid-containerBackground:'#EAECF0' 
+}

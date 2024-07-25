@@ -126,19 +126,19 @@ export default function NotificationPage() {
                     </div>
                 ))}
             </div>
-            <div className=" mt-4 flex flex-col gap-4">
+            <div className="px-4 mt-4 flex flex-col gap-4">
                 {notificationTypes[currentTopNavigationLink]?.notifications.map((notification, index) => (
                     <div key={index} className="flex gap-4 border-b-[1px] border-gray-900/30 pb-4">
-                        <div>
+                        <div className=''>
                             <img
-                                className="rounded-full h-8 w-8 mt-2 object-cover"
+                                className="rounded-md h-8 w-8 mt-2 object-cover"
                                 src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?cs=srgb&dl=pexels-simon-robben-614810.jpg&fm=jpg"
                                 alt="Avatar"
                             />
                         </div>
-                        <div className="flex flex-col gap-4">
-                        <div className='flex items-center space-x-3'>
-                                <p className="text-[16px]">{notification.message}</p>
+                        <div className="mt-1">
+                            <div className='flex space-x-5 w-full'>
+                                <p className="text-[16px] text-wrap "><span className='font-semibold'>Joseph Emma </span>{notification.message}</p>
                                 {notificationTypes[currentTopNavigationLink]?.type === 'Emergencies' ?
                                     <CircleIcon className='h-4  text-red-400 w-4 fill-red-400 mt-1' />
                                     :
@@ -146,17 +146,18 @@ export default function NotificationPage() {
                                     <CircleIcon className='h-4  text-green-400 w-4 fill-green-400 mt-1' />
                                 }
                             </div>
-                            <div className="flex items-center gap-3 text-[13px]">
+                            <div className="flex items-center gap-3 text-[13px] mt-2">
                                 <p>{notification.timestamp}</p>
                                 <div className="h-4 w-[1px] bg-gray-400"></div>
                                 <div className="flex items-center gap-[3px]">
                                     <img src="/assets/verification.svg" alt="Emergency Icon" className="h-5 w-5 mr-1" />
                                     {renderNotificationType(notificationTypes[currentTopNavigationLink]?.type)}
+
                                 </div>
                             </div>
-                            <div className="flex gap-4">
+                            <div className="flex gap-4 mt-4">
                                 <Button label="View" buttonClass="text-sm w-[70px] p-2" onClick={handleSubmit} />
-                                <Button label="Marked as resolved" buttonClass="text-sm hover:bg-gray-900/40 hover:text-white w-[170px] p-2 bg-white border-[1px] border-gray-900/20 !text-black" onClick={handleSubmit} />
+                                <Button label="Marked as resolved" buttonClass="text-sm hover:bg-gray-900/40 !hover:text-white w-[170px] p-2 bg-white border-[1px] border-gray-900/20 !text-black" onClick={handleSubmit} />
                             </div>
                         </div>
                     </div>

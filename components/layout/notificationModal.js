@@ -14,17 +14,17 @@ export default function NotificationComponent({ onClose }) {
             notifications: [
                 {
                     id: 1,
-                    message: 'Joseph Emma just submitted his details for verification as a Driver.',
+                    message: 'just submitted his details for verification as a Driver.',
                     timestamp: '3 hrs ago',
                 },
                 {
                     id: 2,
-                    message: 'Joseph Emma just submitted his details for verification as a Driver.',
+                    message: 'just submitted his details for verification as a Driver.',
                     timestamp: '6 hrs ago',
                 },
                 {
                     id: 3,
-                    message: 'Joseph Emma just submitted his details for verification as a Driver.',
+                    message: 'just submitted his details for verification as a Driver.',
                     timestamp: '1 hrs ago',
                 },
                 // Add more verification type notifications as needed
@@ -35,7 +35,7 @@ export default function NotificationComponent({ onClose }) {
             notifications: [
                 {
                     id: 2,
-                    message: 'New support ticket created.',
+                    message: 'just complained his application keeps crashing and bookings scheduled disappeared.',
                     timestamp: '2 hrs ago',
                 },
                 // Add more support type notifications as needed
@@ -46,7 +46,7 @@ export default function NotificationComponent({ onClose }) {
             notifications: [
                 {
                     id: 3,
-                    message: 'Emergency alert: Fire reported near the office.',
+                    message: 'just clicked the safety button ',
                     timestamp: '1 hr ago',
                 },
                 // Add more emergency type notifications as needed
@@ -57,7 +57,7 @@ export default function NotificationComponent({ onClose }) {
             notifications: [
                 {
                     id: 4,
-                    message: 'You received a new product review.',
+                    message: 'just uploaded his photos, click to view and review his photos.',
                     timestamp: '30 mins ago',
                 },
                 // Add more review type notifications as needed
@@ -141,16 +141,16 @@ export default function NotificationComponent({ onClose }) {
             <div className="px-4 mt-4 overflow-y-scroll h-[300px] flex flex-col gap-4">
                 {notificationTypes[currentTopNavigationLink]?.notifications.map((notification, index) => (
                     <div key={index} className="flex gap-4 border-b-[1px] border-gray-900/30 pb-4">
-                        <div>
+                        <div className=''>
                             <img
-                                className="rounded-full h-8 w-8 mt-2 object-cover"
+                                className="rounded-md h-8 w-8 mt-2 object-cover"
                                 src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?cs=srgb&dl=pexels-simon-robben-614810.jpg&fm=jpg"
                                 alt="Avatar"
                             />
                         </div>
-                        <div className="flex flex-col gap-4">
-                            <div className='flex items-center space-x-3'>
-                                <p className="text-[16px]">{notification.message}</p>
+                        <div className="mt-1">
+                            <div className='flex space-x-3'>
+                                <p className="text-[16px] text-wrap w-[30rem]"><span className='font-semibold'>Joseph Emma </span>{notification.message}</p>
                                 {notificationTypes[currentTopNavigationLink]?.type === 'Emergencies' ?
                                     <CircleIcon className='h-4  text-red-400 w-4 fill-red-400 mt-1' />
                                     :
@@ -158,7 +158,7 @@ export default function NotificationComponent({ onClose }) {
                                     <CircleIcon className='h-4  text-green-400 w-4 fill-green-400 mt-1' />
                                 }
                             </div>
-                            <div className="flex items-center gap-3 text-[13px]">
+                            <div className="flex items-center gap-3 text-[13px] mt-2">
                                 <p>{notification.timestamp}</p>
                                 <div className="h-4 w-[1px] bg-gray-400"></div>
                                 <div className="flex items-center gap-[3px]">
@@ -167,7 +167,7 @@ export default function NotificationComponent({ onClose }) {
 
                                 </div>
                             </div>
-                            <div className="flex gap-4">
+                            <div className="flex gap-4 mt-4">
                                 <Button label="View" buttonClass="text-sm w-[70px] p-2" onClick={handleSubmit} />
                                 <Button label="Marked as resolved" buttonClass="text-sm hover:bg-gray-900/40 !hover:text-white w-[170px] p-2 bg-white border-[1px] border-gray-900/20 !text-black" onClick={handleSubmit} />
                             </div>

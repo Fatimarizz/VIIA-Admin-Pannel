@@ -12,7 +12,7 @@ import VerficationReminderModal from "./Modals/VerficationReminder";
 import ViewProfileModal from "./Modals/ViewProfileModal";
 import EditUserModal from "./Modals/EditUserModal";
 
-export default function CustomFilterMenu({ data, userType }) {
+export default function UserCustomFilterMenu({ data, userType }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [activeOption, setActiveOption] = useState(null);
 
