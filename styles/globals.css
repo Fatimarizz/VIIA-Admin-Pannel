@@ -74,4 +74,5 @@ body {
 
 .MuiDataGrid-container--top{
   background-color: #EAECF0 !important;
+  border-radius: 10px 10px 0px 0px !important;
 }
