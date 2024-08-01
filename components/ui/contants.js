@@ -1,7 +1,14 @@
 import Tooltip from '@mui/material/Tooltip';
 import UserCustomFilterMenu from '../userManagment/customeMenu';
 import PaymentMenu from '../paymentSection/PaymentMenu';
+import { FileCogIcon, StarIcon } from 'lucide-react';
+import RatingMenu from '../ratings/ratingMenu';
 
+const getRatingLabel = (rating) => {
+  if (rating >= 3) return { label: "Positive", color: "#63FD9A" }; // Green
+  if (rating >= 2.5) return { label: "Neutral", color: "#FAC515" }; // Yellow
+  return { label: "Negative", color: "#F97066" }; // Red
+};
 
 export const getPaymentLogo = (method) => {
   switch (method) {
@@ -353,7 +360,7 @@ export const walletManagementColumns = [
       <div className="flex flex-col mt-2">
 
         <p className='text-sm'>{params.value}
-          
+
         </p>
         <span className='text-xs'>{params.row?.Time}</span>
       </div>
@@ -426,9 +433,9 @@ export const paymentGatewayIntegrationColumns = [
     flex: 2,
     renderCell: (params) => (
       <div className="">
-       
+
         <PaymentMenu userType={'PaymentGateway'} data={params.row} />
-       
+
       </div>
     ),
   },
@@ -476,3 +483,212 @@ export const tripPaymentColumns = [
     },
   },
 ];
+export const allRatingColumns = [
+  { field: "tripCodeID", headerName: "Trip code ID", flex: 1 },
+  {
+    field: "Date",
+    headerName: "Date",
+    flex: 1,
+  },
+  {
+    field: 'Sender',
+    headerName: "Sender",
+    flex: 1,
+    renderCell: (params) => {
+      return (
+        <div className='flex flex-col text-xs my-2'>
+          <p className='text-sm'>
+            {params.value}
+          </p>
+          <p>
+            Passenger
+          </p>
+
+        </div>
+      )
+    }
+  },
+
+  {
+    field: 'Receiver',
+    headerName: "Receiver",
+    flex: 1,
+    renderCell: (params) => {
+      return (
+        <div className='flex flex-col text-xs my-2'>
+          <p className='text-sm'>
+            {params.value}
+          </p>
+          <p>
+            Driver
+          </p>
+
+        </div>
+      )
+    }
+  },
+  {
+    field: "Rating",
+    headerName: "Rating",
+    flex: 1,
+    renderCell: (params) => {
+      const rating = parseFloat(params.value);
+      const { label, color } = getRatingLabel(rating);
+
+      return (
+        <div className="flex flex-col mt-2">
+
+          <div className="flex">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <StarIcon
+                key={star}
+                className="w-4 h-4"
+                style={{
+                  color: star <= rating ? color : "#D1D5DB", // Fill or gray
+                  fill: star <= rating ? color : "#D1D5DB",
+                }}
+              />
+            ))}
+          </div>
+          {/* Label */}
+          <span
+            className=" text-sm font-medium mt-1"
+            style={{ color }}
+          >
+            {label}
+          </span>
+        </div>
+      );
+    },
+  },
+
+  {
+    field: "Comment",
+    headerName: "Comment",
+    flex: 2,
+  },
+  {
+
+    renderCell: (params) => {
+
+      return (
+        <div className='my-2 flex justify-end'>
+          <RatingMenu userType={'rating'} data={params.row} />
+          {/* <RatingsFilterMenu id={id} /> */}
+        </div>
+      );
+    },
+  },
+]
+export const allReportColumns = [
+  { field: "tripCodeID", headerName: "Trip code ID", flex: 1 },
+  {
+    field: "Date",
+    headerName: "Date",
+    flex: 1,
+  },
+  {
+    field: "Reporter",
+    headerName: "Reporter",
+    flex: 1,
+  },
+  {
+    field: "User",
+    headerName: "Reported User",
+    flex: 1,
+  },
+
+  {
+    field: "Details",
+    headerName: "Report Details",
+    flex: 2,
+  },
+
+  {
+    field: "file",
+    headerName: "Attach files",
+    flex: 1,
+    renderCell: (params) => {
+      const id = params.row.id;
+
+      return (
+        <div className='rounded-full h-12 w-12 p-3 bg-[#F0FFF5]'>
+          <FileCogIcon className='text-green-400' />
+        </div>
+      );
+    },
+  },
+  {
+
+
+    renderCell: (params) => {
+
+
+      return (
+        <div className='my-2 flex justify-end'>
+          <RatingMenu userType={'report'} data={params.row} />
+        </div>
+      );
+    },
+  },
+]
+export const allTicketsColumn = [
+  { field: "user_name", headerName: "Name of User", flex: 1 },
+  {
+    field: "ticket_id",
+    headerName: "Ticket ID",
+    flex: 1,
+  },
+  {
+    field: "date",
+    headerName: "Date & Time",
+    flex: 1,
+    renderCell: (params) => {
+
+
+      return (
+        <div className='rounded-full h-12 w-12 p-3 flex flex-col text-xs'>
+          <p className='text-sm'>{params.value}</p>
+          <p>
+            {params.row.time}
+          </p>
+        </div>
+      );
+    },
+  },
+  {
+    field: "issue_category",
+    headerName: "Issue Category",
+    flex: 1,
+  },
+
+  {
+    field: "description",
+    headerName: "Issue Description",
+    flex: 2,
+  },
+
+  {
+    field: "status",
+    headerName: "Status",
+    flex: 1,
+    renderCell: (params) => {
+
+
+      return (
+
+        <div
+          className="mt-4 px-1  w-20 text-center text-sm rounded-full"
+          style={{
+            color: params.value === "Resolved" ? "#027A48" : params.value === "Pending" ? "#344054" : "#175CD3" ,
+            backgroundColor: params.value === "Resolved" ? "#ECFDF3" : params.value === "Pending" ? "#F2F4F7" : "#EFF8FF",
+          }}
+        >
+          {params.value}
+        </div>
+      );
+    },
+  },
+
+]
+

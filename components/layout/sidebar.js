@@ -12,9 +12,9 @@ const Sidebar = ({ mobileNavsidebar, sidebarOpen, setSidebarOpen }) => {
         { name: "Ride Monitoring", current: false, img: "/assets/car.svg" },
         { name: "Bookings", current: false, img: "/assets/booking.svg" },
         { name: "Payments", href: "/payments", current: false, img: "/assets/payment.svg" },
-        { name: "Ratings & Reports", current: false, img: "/assets/rating.svg" },
+        { name: "Ratings & Reports", href: "/ratings",current: false, img: "/assets/rating.svg" },
         { name: "Analytics", current: false, img: "/assets/analytics.svg" },
-        { name: "Support & Helpdesk", current: false, img: "/assets/support.svg" },
+        { name: "Support & Helpdesk", href: "/support" , current: false, img: "/assets/support.svg" },
         { name: "Notifications", href: "/notifications", current: false, img: "/assets/notification.svg" },
     ];
 
