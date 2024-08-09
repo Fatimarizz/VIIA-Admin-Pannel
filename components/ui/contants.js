@@ -3,6 +3,7 @@ import UserCustomFilterMenu from '../userManagment/customeMenu';
 import PaymentMenu from '../paymentSection/PaymentMenu';
 import { FileCogIcon, StarIcon } from 'lucide-react';
 import RatingMenu from '../ratings/ratingMenu';
+import BookingCustomeMenu from '../bookings/bookingCustomMenu';
 
 const getRatingLabel = (rating) => {
   if (rating >= 3) return { label: "Positive", color: "#63FD9A" }; // Green
@@ -691,4 +692,154 @@ export const allTicketsColumn = [
   },
 
 ]
+
+export const allBookingsColumn = [
+  { field: "driver_name", headerName: "Name of Driver", flex: 1 },
+  { field: "passenger_name", headerName: "Name of Passenger", flex: 1 },
+  { field: "pickup_point", headerName: "Pickup Point", flex: 1 },
+  { field: "destination", headerName: "Destination", flex: 1 },
+  {
+    field: "date",
+    headerName: "Date",
+    flex: 1,
+    
+    
+  },
+  { field: "time", headerName: "Time", flex: 1 },
+  { field: "seats", headerName: "Seats", flex: 1 ,
+    renderCell: (params) => {
+      return (
+        <div className='font-semibold'>
+         {params.value}
+        </div>
+      );
+    },
+  },
+  { field: "price", headerName: "Price", flex: 1 ,
+    renderCell: (params) => {
+      return (
+        <div className='font-semibold'>
+         {params.value}
+        </div>
+      );
+    },
+  },
+  
+  {
+    flex: 1,
+    renderCell: (params) => {
+      return (
+        <div className='m-2 flex justify-end'>
+          <BookingCustomeMenu data={params.row} userType={'Booking'}/>
+        </div>
+      );
+    },
+  },
+];
+
+export const requestedRidesColumn = [
+  { field: "passenger_name", headerName: "Name of Passenger", flex: 1 },
+  { field: "pickup_point", headerName: "Pickup Point", flex: 1 },
+  { field: "destination", headerName: "Destination", flex: 1 },
+  {
+    field: "date",
+    headerName: "Date",
+    flex: 1,
+    
+    
+  },
+  { field: "time", headerName: "Time", flex: 1 },
+  { field: "price", headerName: "Price", flex: 1 ,
+    renderCell: (params) => {
+      return (
+        <div className='font-semibold'>
+         {params.value}
+        </div>
+      );
+    },
+  },
+  {
+    renderCell: (params) => {
+      return (
+        <div className='my-2 flex justify-end'>
+          <BookingCustomeMenu data={params.row} userType={'Requested'}/>
+        </div>
+      );
+    },
+  },
+];
+
+
+export const publishedRidesColumn = [
+  { field: "driver_name", headerName: "Name of Driver", flex: 1 },
+  { field: "pickup_point", headerName: "Pickup Point", flex: 1 },
+  { field: "destination", headerName: "Destination", flex: 1 },
+  {
+    field: "date",
+    headerName: "Date",
+    flex: 1,
+    
+    
+  },
+  { field: "time", headerName: "Time", flex: 1 },
+  { field: "seats", headerName: "Seats", flex: 1 ,
+    renderCell: (params) => {
+      return (
+        <div className='font-semibold'>
+         {params.value}
+        </div>
+      );
+    },
+  },
+  { field: "price", headerName: "Price", flex: 1 ,
+    renderCell: (params) => {
+      return (
+        <div className='font-semibold'>
+         {params.value}
+        </div>
+      );
+    },
+  },
+  {
+    renderCell: (params) => {
+      return (
+        <div className='my-2 flex justify-end'>
+          <BookingCustomeMenu data={params.row} userType={'Published'}/>
+        </div>
+      );
+    },
+  },
+];
+
+export const deletedBookingsColumn = [
+  { field: "driver_name", headerName: "Name of Driver", flex: 1 },
+  { field: "passengers", headerName: "Passengers", flex: 2 },
+  { field: "pickup_point", headerName: "Pickup Point", flex: 1 },
+  { field: "destination", headerName: "Destination", flex: 1 },
+  {
+    field: "deleted_date",
+    headerName: "Deleted Date",
+    flex: 1,
+    renderCell: (params) => {
+      return (
+        <div className='rounded-full h-12 w-12 p-3 flex flex-col text-xs'>
+          <p className='text-sm'>{params.value}</p>
+        </div>
+      );
+    },
+  },
+  { field: "reason", headerName: "Reason", flex: 2 },
+  {
+    field: "view",
+    headerName: "View",
+    flex: 1,
+    renderCell: (params) => {
+      return (
+        <BookingCustomeMenu data={params.row} userType={'Deleted'}/>
+      );
+    },
+  },
+];
+
+
 
