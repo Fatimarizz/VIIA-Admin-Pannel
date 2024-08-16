@@ -72,20 +72,19 @@ const AnalyticsBarChart = ({ Xtitle, Ytitle, title, xAxisData, yAxisData, colors
           text: Xtitle,
         },
         grid: {
-          display: false, // Removes the grid lines on the x-axis
+          display: false, 
         },
-        stacked: true, // Stack the bars
+        stacked: true, 
       },
       y: {
-
         title: {
           display: true,
           text: Ytitle,
         },
         grid: {
-          display: false, // Removes the grid lines on the y-axis
+          display: false, 
         },
-        stacked: true, // Stack the bars
+        stacked: true, 
       },
     },
     barThickness: 22, // Adjust this value to make the bars thinner
