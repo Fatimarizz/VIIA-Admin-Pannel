@@ -28,7 +28,7 @@ export default function AnalyticsList() {
     const renderContent = () => {
         switch (currentTopNavigationLink) {
             case 0: // Overview
-                return <Overview />;
+                return <Overview/>;
             case 1: // User Insights
                 return <UserInsights />;
             case 2: // Trip Analytics
