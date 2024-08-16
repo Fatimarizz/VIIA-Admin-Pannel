@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Overview from "./overview";
+import Overview from "./AnalyticsOverview";
 import UserInsights from "./UserInsights";
 import TripAnalytics from "./TripAnalytics";
 import GeographicAnalytics from "./GeographicAnalytics";
