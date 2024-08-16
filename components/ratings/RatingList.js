@@ -182,11 +182,12 @@ export default function RatingList() {
             )}
             {currentTopNavigationLink == 0 &&
             <button
-              onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className="px-4 py-1 flex space-x-1 bg-white text-black font-semibold border rounded-lg "
-            >
-              More Filters
-            </button>
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+            className="px-4 py-1 flex space-x-1 bg-white text-black font-semibold border rounded-lg"
+          >
+              <ListFilter className="h-6 w-6 mt-1 mr-3" />
+            More Filters
+          </button>
 }
           </div>
 

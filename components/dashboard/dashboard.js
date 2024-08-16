@@ -6,6 +6,7 @@ import DashboardCards from './dashboardCards';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { CalendarIcon } from 'lucide-react';
+import FareCollectionGraph from './FareGraph';
 
 const DashboardComponent = () => {
     const [currentNavigationIndex, setCurrentNavigationIndex] = useState(0);
@@ -97,7 +98,7 @@ const DashboardComponent = () => {
                                 />
                             </div>
                         ))}
-                         <div>
+                        <div>
                             <Button
                                 buttonClass="bg-green-500 text-white px-4 py-2 flex items-center"
                                 onClick={() => setShowDatePicker(!showDatePicker)}
@@ -106,7 +107,7 @@ const DashboardComponent = () => {
                         </div>
                     </div>
 
-                    
+
 
                     {showDatePicker && (
                         <div className="mt-4 bg-white p-4 rounded shadow-lg">
@@ -132,7 +133,7 @@ const DashboardComponent = () => {
                     <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6 gap-10">
                         {dashboardData.rideDetailsCard.map((item, index) => (
                             <div key={index} className="w-full">
-                                <DashboardCards viewAll={true} title={item.name} number={item.number}  />
+                                <DashboardCards viewAll={true} title={item.name} number={item.number} />
                             </div>
                         ))}
                     </div>
@@ -140,7 +141,7 @@ const DashboardComponent = () => {
                     <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6 gap-6">
                         {dashboardData.driverListingcard.map((item, index) => (
                             <div key={index} className="w-full">
-                                <DashboardCards title={item.name} number={item.number}  />
+                                <DashboardCards title={item.name} number={item.number} />
                             </div>
                         ))}
                     </div>
@@ -148,10 +149,14 @@ const DashboardComponent = () => {
                     <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-6 gap-6">
                         {dashboardData.dashboardRevenueCard.map((item, index) => (
                             <div key={index} className="w-full">
-                                <DashboardCards title={item.name} number={item.number}  />
+                                <DashboardCards title={item.name} number={item.number} />
                             </div>
                         ))}
                     </div>
+                </div>
+                <div className=" ">
+                    
+                    <FareCollectionGraph />
                 </div>
             </div>
         </div>

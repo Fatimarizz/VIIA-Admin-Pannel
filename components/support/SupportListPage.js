@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Table from '../ui/Table';
 import { allTicketsColumn } from '../ui/contants';
 import { SearchIcon } from "lucide-react";
+import { ListFilter } from 'lucide-react';
 
 export default function SupportListPage() {
   const [currentTopNavigationLink, setCurrentTopNavigationLink] = useState(0);
@@ -159,14 +160,17 @@ export default function SupportListPage() {
                 })}
               </div>
             )}
+            {currentTopNavigationLink === 0 &&
             <button
               onClick={() => setIsFilterOpen(!isFilterOpen)}
               className="px-4 py-1 flex space-x-1 bg-white text-black font-semibold border rounded-lg"
             >
+                <ListFilter className="h-6 w-6 mt-1 mr-3" />
               More Filters
             </button>
+            }
           </div>
-
+          
           {isFilterOpen && (
             <div className="border p-4 rounded-lg bg-white shadow-lg mb-4 absolute top-10 left-6 w-[30%] z-50">
               <h2 className="font-semibold text-2xl mb-3">Filters</h2>
