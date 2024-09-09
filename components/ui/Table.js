@@ -25,7 +25,7 @@ const theme = createTheme({
   },
 });
 
-const Table = ({ columns, rows }) => {
+const Table = ({ columns, rows ,hoverColor }) => {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(5);
 
@@ -47,8 +47,8 @@ const Table = ({ columns, rows }) => {
             rows={paginatedRows}
             columns={columns}
             pagination={false} // Disable default pagination
-            style={{ fontSize: '13px' }}
-            className="custom-data-grid"
+            style={{ fontSize: '13px' ,}}
+            className={`custom-data-grid hover:bg-${hoverColor}`}
           />
           {/* Custom Pagination */}
           <div className="">

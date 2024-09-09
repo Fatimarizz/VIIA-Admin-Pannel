@@ -4,6 +4,8 @@ import PaymentMenu from '../paymentSection/PaymentMenu';
 import { FileCogIcon, StarIcon } from 'lucide-react';
 import RatingMenu from '../ratings/ratingMenu';
 import BookingCustomeMenu from '../bookings/bookingCustomMenu';
+import { renderCheckbox } from 'react-data-grid';
+import RideMenu from '../rideMonitering/rideMenu';
 
 const getRatingLabel = (rating) => {
   if (rating >= 3) return { label: "Positive", color: "#63FD9A" }; // Green
@@ -620,11 +622,7 @@ export const allReportColumns = [
     },
   },
   {
-
-
     renderCell: (params) => {
-
-
       return (
         <div className='my-2 flex justify-end'>
           <RatingMenu userType={'report'} data={params.row} />
@@ -841,5 +839,131 @@ export const deletedBookingsColumn = [
   },
 ];
 
+
+export const onGoingTripColumns = [
+  { field: "tripCodeID", headerName: "Trip code ID", flex: 2 },
+  {
+    field: "driver_name",
+    headerName: "Driver",
+    flex: 2,
+  },
+  {
+    field: "passengers",
+    headerName: "Passengers",
+    flex: 2,
+  },
+  {
+    field: "start_point",
+    headerName: "Start Point",
+    flex: 2,
+  },
+
+  {
+    field: "end_point",
+    headerName: "Destination",
+    flex: 2,
+  },
+
+  
+  {
+    field: "start_time",
+    headerName: "Time Started",
+    flex: 2,
+  },
+  {
+    field: "eta",
+    headerName: "ETA",
+    flex: 2,
+  },
+  { field: "price", headerName: "Price", flex: 2 ,
+    renderCell: (params) => {
+      return (
+        <div className='font-semibold'>
+         {params.value}
+        </div>
+      );
+    },
+  },
+
+  {
+    renderCell: (params) => {
+      return (
+        <div className='my-2 flex justify-end'>
+          <RideMenu userType={'ongoing'} data={params.row} />
+        </div>
+      );
+    },
+  },
+]
+export const completedTripColumns = [
+  { field: "tripCodeID", headerName: "Trip code ID", flex: 2 },
+  {
+    field: "driver_name",
+    headerName: "Driver",
+    flex: 2,
+  },
+  {
+    field: "passengers",
+    headerName: "Passengers",
+    flex: 2,
+  },
+  {
+    field: "start_point",
+    headerName: "Start Point",
+    flex: 2,
+  },
+
+  {
+    field: "end_point",
+    headerName: "Destination",
+    flex: 2,
+  },
+
+  
+  {
+    field: "start_time",
+    headerName: "Time Started",
+    flex: 3,
+    renderCell: (params)=>(
+      <div>
+        {params.value}-{params.row.end_time}
+      </div>
+    )
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    flex: 3,
+    renderCell: (params) => (
+      <div className="my-2 text-center w-24 p-1 text-sm rounded-lg"
+        style={{
+          backgroundColor: params.value === "Completed" ? "#ECFDF3" : "#FEF3F2",
+          color: params.value === "Completed" ? "#027A48" : "#B42318",
+        }}
+
+      >
+      {params.value}
+      </div>
+    ),
+  },
+  { field: "price", headerName: "Price", flex: 2 ,
+    renderCell: (params) => {
+      return (
+        <div className='font-semibold'>
+         {params.value}
+        </div>
+      );
+    },
+  },
+  {
+    renderCell: (params) => {
+      return (
+        <div className='my-2 flex justify-end'>
+          <RideMenu userType={'complete'}data={params.row} />
+        </div>
+      );
+    },
+  },
+]
 
 
