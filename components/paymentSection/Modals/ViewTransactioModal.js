@@ -100,13 +100,7 @@ const ViewTransactionModal = ({ isOpen, onClose, data }) => {
                 Retry Payment
               </button>
             }
-            <button
-              type="button"
-              className="text-sm text-green-700 px-3 py-2 bg-white border border-gray-300 rounded-md"
-              onClick={handleCloseModal}
-            >
-              View Trip Info
-            </button>
+            
             <button
               type="button"
               onClick={()=>handleDownload(data)}

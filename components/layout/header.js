@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import UserMenu from './userMenu';
 import NotificationComponent from './notificationModal';
+import { useRouter } from 'next/router';
 const Header = ({ title, subheading }) => {
     const [showNotificationModal, setShowNotificationModal] = useState(false); // State for modal visibility
-
+const router = useRouter()
     const data = {
         name: 'Ali',
         avatar: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?cs=srgb&dl=pexels-simon-robben-614810.jpg&fm=jpg'
@@ -23,7 +24,7 @@ const Header = ({ title, subheading }) => {
                     </div>
                     <div className="flex gap-8 items-center">
                         <img className="cursor-pointer  h-6 w-6" src="/assets/security.svg" />
-                        <img className="cursor-pointer  h-6 w-6" src=" /assets/messages.svg" />
+                        <img className="cursor-pointer  h-6 w-6" src=" /assets/messages.svg" onClick={()=>router.push("/support")} />
                         <div className='relative'>
                             <p className='bg-red-500 text-xs rounded-full p-1 px-2 text-white absolute -right-2 -top-4 '>
                                 6

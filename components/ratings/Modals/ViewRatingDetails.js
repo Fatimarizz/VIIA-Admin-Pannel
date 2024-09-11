@@ -218,9 +218,7 @@ const ViewRatingDetails = () => {
               <button className="text-red-500 px-3 py-1 rounded-md" onClick={openDeleteModal}>
                 Delete Rating
               </button>
-              <button className="text-green-500 bg-slate-50 px-3 py-1 rounded-md" onClick={openTripInfoModal}>
-                View Trip Info
-              </button>
+             
               <button className="bg-yellow-600 text-white px-3 py-1 rounded-md" onClick={openFlagReceiverModal}>
                 Flag Receiver
               </button>

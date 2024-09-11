@@ -6,6 +6,8 @@ import RatingMenu from '../ratings/ratingMenu';
 import BookingCustomeMenu from '../bookings/bookingCustomMenu';
 import { renderCheckbox } from 'react-data-grid';
 import RideMenu from '../rideMonitering/rideMenu';
+import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/solid';
+import Link from 'next/link';
 
 const getRatingLabel = (rating) => {
   if (rating >= 3) return { label: "Positive", color: "#63FD9A" }; // Green
@@ -685,6 +687,21 @@ export const allTicketsColumn = [
         >
           {params.value}
         </div>
+      );
+    },
+  },
+  {
+    field: "action",
+    headerName: "Action",
+    flex: 1,
+    renderCell: (params) => {
+
+
+      return (
+
+        <Link href={`/support/${params.row.id}`}>
+          <ChatBubbleLeftEllipsisIcon className='text-blue-500 h-8 w-7 mt-2  cursor-pointer'/>
+        </Link>
       );
     },
   },
